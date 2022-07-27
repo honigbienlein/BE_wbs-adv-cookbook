@@ -12,9 +12,12 @@ const pool = new Pool({
 
 import express from "express";
 import data from "./data.json" assert {type: "json"};
+import cors from "cors";
 
 const app = express();
 const port = 8000;
+
+app.use(cors());
 
 app.get('/', (req, res) => {
     res.send('Wenn du schlau bist und die richtige Route wählst, bekommst du ein json zurück.')
