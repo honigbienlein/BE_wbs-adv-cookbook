@@ -2,6 +2,8 @@ import express from "express";
 import data from "./data.json" assert {type: "json"};
 import cors from "cors";
 import * as pg from 'pg'
+import 'dotenv/config'
+
 
 // BE Server
 const app = express();
@@ -9,11 +11,11 @@ const port = 8000;
 
 // DB
 const pool = new pg.default.Pool({
-    user: 'ckznsenv',
-    host: 'abul.db.elephantsql.com',
-    database: 'ckznsenv',
-    password: 'BmPKvifGgvhUR71HSRjysr21ND7mNOix',
-    port: 5432,
+    user: process.env.DB_USER,
+    host: process.env.DB_HOST,
+    database: process.env.DB_NAME,
+    password: process.env.DB_PASSWORD,
+    port: process.env.DB_PORT,
 });
 
 // to get pictures public
@@ -141,6 +143,6 @@ app.get('/data', async (req, res) => {
     res.json(data)
 })
 
-app.listen(port, () => {
+app.listen(process.env.PORT ?? port, () => {
     console.log(`Example app listening on port ${port}`);
 });
